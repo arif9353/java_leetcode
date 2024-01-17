@@ -1,4 +1,5 @@
 public class array2 {
+    /*MY APPROACH GIVING TIME COMPLEXITY O(nlog(n))
     public static int rotatedIndex(int[]arr){
         int start=0;int end=arr.length-1;
         while(start<=end){
@@ -48,6 +49,51 @@ public class array2 {
     public static void main(String args[]){
         int[] arr = {4,5,6,7,0,1,2};
         int target = 3;
+        int result = rotateArray(arr, target);
+        System.out.println(result);
+    }*/
+    //Time complexity O(log(n))
+    public static int rotateArray(int[]arr, int target){
+        int minEleIndex = minElementIndex(arr);
+        if(arr[minEleIndex]<=target && target<=arr[arr.length-1]){
+            return searchArray(arr, minEleIndex,arr.length-1,target);
+        }
+        return searchArray(arr,0,minEleIndex,target);
+    }
+    public static int searchArray(int[] arr, int start, int end, int target){
+        while(start<=end){
+            int mid = (start+end)/2;
+            if(arr[mid]==target){
+                return mid;
+            }
+            else if(arr[mid]>target){
+                end = mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+        } 
+        return -1;
+    }
+    public static int minElementIndex(int[]arr){
+        int start=0; int end=arr.length-1;
+        while(start<=end){
+            int mid=(start+end)/2;
+            if(mid>0 && arr[mid-1]>arr[mid]){
+                return mid;
+            }
+            else if(arr[start]<=arr[mid] && arr[mid]>arr[end]){
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+        }
+        return start;
+    }
+        public static void main(String args[]){
+        int[] arr = {4,5,6,7,0,1,2};
+        int target = 6;
         int result = rotateArray(arr, target);
         System.out.println(result);
     }

@@ -1,4 +1,7 @@
+import java.util.HashSet;
+
 class array1 {
+    /*My approach giving TC O(n^2)
     public static boolean ifAppears(int[] arr){
         for(int i=0;i<arr.length;i++){
             int ele = arr[i];
@@ -6,6 +9,19 @@ class array1 {
                 if(ele == arr[j]){
                     return true;
                 }
+            }
+        }
+        return false;
+    }*/
+    //TC O(N)
+    public static boolean ifAppears(int[] arr){
+        HashSet<Integer> set = new HashSet<>();
+        for(int i=0;i<arr.length;i++){
+            if(set.contains(arr[i])){
+                return true;
+            }
+            else{
+                set.add(arr[i]);
             }
         }
         return false;
